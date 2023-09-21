@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function numHijos() {
+        var mensaje;
+        var opcion = prompt("Introduzca nº de hijos:", " ");
+
+        if (opcion == null || opcion == "") {
+          mensaje = "Has cancelado o introducido el número vacío";
+        } else {
+          mensaje = opcion;
+        }
+        alert(mensaje);
+      }
+    </script>
+  </head>
+  <body onload="javascript:numHijos">
+  </body>
+</html>
