@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>
-      function numHijos() {
-        var mensaje;
-        var opcion = prompt("Introduzca nº de hijos:", " ");
+<head>
+    <title>Pregunta y Respuesta</title>
+</head>
+<body>
+    <h1>Por favor, responde la siguiente pregunta:</h1>
+    <label for="respuesta">¿Número de hijos?</label>
+    <input type="text" id="respuesta">
+    <button onclick="mostrarRespuesta()">Enviar</button>
 
-        if (opcion == null || opcion == "") {
-          mensaje = "Has cancelado o introducido el número vacío";
-        } else {
-          mensaje = opcion;
+    <p id="mensajeRespuesta"></p>
+
+    <script>
+        function mostrarRespuesta() {
+            // Obtén el valor ingresado por el usuario
+            var respuesta = document.getElementById("respuesta").value;
+
+            // Verifica si se ingresó una respuesta
+            if (respuesta !== "") {
+                // Muestra la respuesta en un mensaje
+                document.getElementById("mensajeRespuesta").innerHTML = "Tu respuesta es: " + respuesta;
+            } else {
+                // Muestra un mensaje de error si no se ingresó una respuesta
+                document.getElementById("mensajeRespuesta").innerHTML = "Por favor, ingresa una respuesta válida.";
+            }
         }
-        alert(mensaje);
-      }
     </script>
-  </head>
-  <body onload="javascript:numHijos">
-  </body>
+</body>
 </html>
