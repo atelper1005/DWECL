@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversión de Velocidad</title>
+</head>
+<body>
+    <h1>Convierte la velocidad de km/h a m/s:</h1>
+    <label for="velocidadKmph">Velocidad (km/h):</label>
+    <input type="number" id="velocidadKmph"><br>
+    <button onclick="convertirVelocidad()">Convertir</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function convertirVelocidad() {
+            // Obtén la velocidad en km/h ingresada por el usuario
+            var velocidadKmph = parseFloat(document.getElementById("velocidadKmph").value);
+
+            // Verifica si se ingresó una velocidad válida
+            if (!isNaN(velocidadKmph)) {
+                // Convierte la velocidad a m/s (1 km/h = 0.277778 m/s)
+                var velocidadMs = velocidadKmph * 0.277778;
+
+                // Muestra el resultado
+                document.getElementById("resultado").innerHTML = "La velocidad en m/s es: " + velocidadMs.toFixed(2) + " m/s";
+            } else {
+                // Muestra un mensaje de error si no se ingresó una velocidad válida
+                document.getElementById("resultado").innerHTML = "Por favor, ingresa una velocidad válida en km/h.";
+            }
+        }
+    </script>
+</body>
+</html>
