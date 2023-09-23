@@ -6,6 +6,40 @@
     <title>Ejercicio 8</title>
 </head>
 <body>
-    
+    <h1>Descomposición en Factores Primos</h1>
+    <label for="numero">Ingresa un número:</label>
+    <input type="number" id="numero"><br>
+    <button onclick="descomponerEnFactoresPrimos()">Calcular Factores Primos</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function descomponerEnFactoresPrimos() {
+            // Obtén el número ingresado por el usuario
+            var numero = parseInt(document.getElementById("numero").value);
+
+            // Verifica si el número es válido (entero positivo mayor que 1)
+            if (!isNaN(numero) && numero > 1) {
+                var resultado = "La descomposición en factores primos de " + numero + " es: ";
+
+                // Calcula los factores primos
+                for (var divisor = 2; divisor <= numero; divisor++) {
+                    while (numero % divisor === 0) {
+                        resultado += divisor;
+                        numero /= divisor;
+                        if (numero > 1) {
+                            resultado += " x ";
+                        }
+                    }
+                }
+
+                // Muestra el resultado
+                document.getElementById("resultado").innerHTML = resultado;
+            } else {
+                // Muestra un mensaje de error si el número no es válido
+                document.getElementById("resultado").innerHTML = "Por favor, ingresa un número entero positivo mayor que 1.";
+            }
+        }
+    </script>
 </body>
 </html>
