@@ -6,6 +6,42 @@
     <title>Ejercicio 4</title>
 </head>
 <body>
-    
+    <h1>Calculadora de Primas de Nómina</h1>
+    <label for="sueldo">Sueldo del empleado (en €):</label>
+    <input type="number" id="sueldo"><br>
+    <label for="antiguedad">Antigüedad del empleado (en años):</label>
+    <input type="number" id="antiguedad"><br>
+    <button onclick="calcularPrima()">Calcular Prima</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularPrima() {
+            // Obtén el sueldo y la antigüedad ingresados por el usuario
+            var sueldo = parseFloat(document.getElementById("sueldo").value);
+            var antiguedad = parseFloat(document.getElementById("antiguedad").value);
+
+            // Verifica si el sueldo y la antigüedad son números válidos
+            if (!isNaN(sueldo) && !isNaN(antiguedad)) {
+                var prima = 0;
+
+                // Calcula la prima según las reglas dadas
+                if (sueldo < 750 && antiguedad >= 10) {
+                    prima = sueldo * 0.10;
+                } else if (sueldo >= 750 && antiguedad >= 10) {
+                    prima = sueldo * 0.05;
+                }
+
+                // Calcula el sueldo total (sueldo + prima)
+                var sueldoTotal = sueldo + prima;
+
+                // Muestra el resultado
+                document.getElementById("resultado").innerHTML = "La prima mensual es de: " + prima.toFixed(2) + " €<br>El sueldo total es de: " + sueldoTotal.toFixed(2) + " €";
+            } else {
+                // Muestra un mensaje de error si los valores no son números válidos
+                document.getElementById("resultado").innerHTML = "Por favor, ingresa sueldo y antigüedad válidos.";
+            }
+        }
+    </script>
 </body>
 </html>
