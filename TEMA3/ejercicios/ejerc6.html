@@ -6,54 +6,9 @@
     <title>Ejercicio 6</title>
 </head>
 <body>
-<<<<<<< HEAD
     <script>
         function ecuacion() {
             
-=======
-     <h1>Calculadora de Ecuación de Segundo Grado</h1>
-    <label for="a">Coeficiente a:</label>
-    <input type="number" id="a"><br>
-    <label for="b">Coeficiente b:</label>
-    <input type="number" id="b"><br>
-    <label for="c">Coeficiente c:</label>
-    <input type="number" id="c"><br>
-    <button onclick="calcularRaices()">Calcular Raíces</button>
-
-    <p id="resultado"></p>
-
-    <script>
-        function calcularRaices() {
-            // Obtén los coeficientes ingresados por el usuario
-            var a = parseFloat(document.getElementById("a").value);
-            var b = parseFloat(document.getElementById("b").value);
-            var c = parseFloat(document.getElementById("c").value);
-
-            // Verifica si los coeficientes son números válidos
-            if (!isNaN(a) && !isNaN(b) && !isNaN(c)) {
-                // Calcula el discriminante
-                var discriminante = b * b - 4 * a * c;
-
-                if (discriminante > 0) {
-                    // Dos raíces reales distintas
-                    var x1 = (-b + Math.sqrt(discriminante)) / (2 * a);
-                    var x2 = (-b - Math.sqrt(discriminante)) / (2 * a);
-                    document.getElementById("resultado").innerHTML = "Las raíces son x1 = " + x1.toFixed(2) + " y x2 = " + x2.toFixed(2);
-                } else if (discriminante === 0) {
-                    // Una raíz real (raíz doble)
-                    var x = -b / (2 * a);
-                    document.getElementById("resultado").innerHTML = "La raíz doble es x = " + x.toFixed(2);
-                } else {
-                    // Raíces complejas (no reales)
-                    var parteReal = -b / (2 * a);
-                    var parteImaginaria = Math.sqrt(Math.abs(discriminante)) / (2 * a);
-                    document.getElementById("resultado").innerHTML = "Las raíces son complejas: x1 = " + parteReal.toFixed(2) + " + " + parteImaginaria.toFixed(2) + "i y x2 = " + parteReal.toFixed(2) + " - " + parteImaginaria.toFixed(2) + "i";
-                }
-            } else {
-                // Muestra un mensaje de error si los valores no son números válidos
-                document.getElementById("resultado").innerHTML = "Por favor, ingresa coeficientes válidos.";
-            }
->>>>>>> 11d47feef06bf4281c4f66ea08bab774f1170115
         }
     </script>
 </body>
