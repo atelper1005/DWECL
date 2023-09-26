@@ -6,6 +6,34 @@
     <title>Ejercicio 8</title>
 </head>
 <body>
+
+    <script>
+        function descomponerFactoresPrimos() {
+            var num = prompt("introduce un número positivo entero mayor que 1");
+
+            if (!isNaN(num) && num > 1) {
+                var resultado  = "La descomposición en factores primos de " + num + " es: ";
+
+                for (var divisor = 2; divisor <= num; divisor++) {
+                    while (num % divisor == 0) {
+                        resultado += divisor;
+                        num /= divisor;
+                        if (num > 1) {
+                            resultado += " x ";
+                        }
+                    }
+                }
+
+                alert(resultado);
+
+            } else {
+                resultado = "Ingrese un número entero positivo mayor que 1"
+            }
+        }
+
+        descomponerFactoresPrimos();
+
+    </script>
     
 </body>
 </html>

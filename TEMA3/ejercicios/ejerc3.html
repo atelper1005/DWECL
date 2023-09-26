@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +7,26 @@
 </head>
 <body>
     <script>
-        window.onload = function comparar() {
+        function comparar() {
         var n1 = prompt("introduce el primer numero ");
         var n2 = prompt("introduce el segundo numero ");
-        var n3 = prompt("introduce el tercer numero")
+        var n3 = prompt("introduce el tercer numero");
+        var resultado;
 
-        if (parseInt(n1) && parseInt(n2) && parseInt(n3) < 100 & (n1 && n2 && n3) > 10) {
-          document.write("OK");
+        if (n1==null||n1==""||n2==null||n2==""||n3==null||n3=="") {
+          resultado = "No se han introducido los valores correctos";
+
+        }else if (n1 >= 10 && n1 <= 100 && n2 >= 10 && n2 <= 100 && n3 >= 10 && n3 <= 100) {
+          resultado = "OK";
+
         } else {
-          document.write("No cumple");
+          resultado = "No cumple";
         }
-      };
+        alert(resultado);
+      }
+      
+      comparar();
+
     </script>
 </body>
 </html>

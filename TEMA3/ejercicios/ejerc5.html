@@ -1,11 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 5</title>
 </head>
 <body>
-    
+    <script>
+        function ordenarMayor() {
+            var n1 = prompt("Introduzca el primer número");
+            var n2 = prompt("Introduzca el segundo número");
+            var n3 = prompt("Introduzca el tercer número");
+
+            if (n1 < n2 && n1 < n3 && n2 < n3) {
+                alert(n3 + " es mayor que " + n2 + " que es mayor que " + n1)
+            } else if (n2 > n1 && n2 > n3 && n1 > n3) {
+                alert(n2 + " es mayor que " + n1 + " que es mayor que " + n3)
+            } else if (n2 > n1 && n2 > n3 && n3 > n1 ) {
+                alert(n2 + " es mayor que " + n3 + " que es mayor que " + n1)
+            } else if (n3 < n2 && n3 < n1 && n2 < n1) {
+                alert(n1 + " es mayor que " + n2 + " que es mayor que " + n3)
+            } else if (n3 > n1 && n3 > n2 && n1 > n2) {
+                alert(n3 + " es mayor que " + n1 + " que es mayor que " + n2)
+            } else if (n3 > n2 && n3 < n1 && n2 < n1) {
+                alert(n1 + " es mayor que " + n3 + " que es mayor que " + n2)
+            }
+        }
+
+        ordenarMayor();
+
+    </script>
 </body>
 </html>
