@@ -6,6 +6,7 @@
     <title>Ejercicio 7</title>
 </head>
 <body>
+<<<<<<< HEAD
     <script>
         function factorial() {
             var num = prompt("Introduce un número");
@@ -18,6 +19,36 @@
             alert(resultado);
         }
         factorial();
+=======
+    <h1>Calculadora de Factorial</h1>
+    <label for="numero">Ingresa un número:</label>
+    <input type="number" id="numero"><br>
+    <button onclick="calcularFactorial()">Calcular Factorial</button>
+
+    <p id="resultado"></p>
+
+    <script>
+        function calcularFactorial() {
+            // Obtén el número ingresado por el usuario
+            var numero = parseInt(document.getElementById("numero").value);
+
+            // Verifica si el número es válido (no negativo)
+            if (!isNaN(numero) && numero >= 0) {
+                var factorial = 1;
+
+                // Calcula el factorial del número
+                for (var i = 1; i <= numero; i++) {
+                    factorial *= i;
+                }
+
+                // Muestra el resultado
+                document.getElementById("resultado").innerHTML = "El factorial de " + numero + " es " + factorial;
+            } else {
+                // Muestra un mensaje de error si el número no es válido
+                document.getElementById("resultado").innerHTML = "Por favor, ingresa un número entero no negativo válido.";
+            }
+        }
+>>>>>>> 11d47feef06bf4281c4f66ea08bab774f1170115
     </script>
 </body>
 </html>
