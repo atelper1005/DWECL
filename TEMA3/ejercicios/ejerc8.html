@@ -11,17 +11,20 @@
         function descomponerFactoresPrimos() {
 
             var num = prompt("introduce un número positivo entero mayor que 1");
+
             /* isNaN es la función de NaN, is NaN intenta convertir el parámetro pasado a un número. 
             Si el parámetro no se puede convertir, devuelve true; en caso contrario, devuelve false */
-            if (!isNaN(num) && num > 1) {
-                var resultado  = "La descomposición en factores primos de " + num + " es: ";
 
-                for (var divisor = 2; divisor <= num; divisor++) {
-                    while (num % divisor == 0) {
-                        resultado += divisor;
-                        num /= divisor;
+            if (!isNaN(num) && num > 1) {
+
+                var resultado  = "La descomposición en factores primos de " + num + " es igual a ";
+
+                for (var divisor = 2; divisor <= num; divisor++) {  //ponemos como el divisor mínimo a 2, que llegue como mucho a igualar el número y que vaya incrementando
+                    while (num % divisor == 0) {                    //con while decimos, mientras que el resto de la operación de 0
+                        resultado += divisor;                       //Se le suma al resultado el valor del divisor
+                        num /= divisor;                             //Y al número se le divide el divisor asignado
                         if (num > 1) {
-                            resultado += " x ";
+                            resultado += " x ";                     //Mientras que el número dado sea mayor de 1 al resultado se le sumará las acciones anteriores
                         }
                     }
                 }
@@ -29,7 +32,9 @@
                 alert(resultado);
 
             } else {
+
                 resultado = "Ingrese un número entero positivo mayor que 1"
+
             }
         }
 
