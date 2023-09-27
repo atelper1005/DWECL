@@ -8,23 +8,30 @@
 <body>
     <script>
         function comparar() {
+
         var n1 = prompt("introduce el primer numero ");
         var n2 = prompt("introduce el segundo numero ");
         var n3 = prompt("introduce el tercer numero");
         var resultado;
 
+        //Con el primer if se descartan los resultados nulos
         if (n1==null||n1==""||n2==null||n2==""||n3==null||n3=="") {
           resultado = "No se han introducido los valores correctos";
-
+        
+          //Cuando son 3 números hay que ir comparando uno por uno con las limitaciones
         }else if (n1 >= 10 && n1 <= 100 && n2 >= 10 && n2 <= 100 && n3 >= 10 && n3 <= 100) {
           resultado = "OK";
 
+          //El final es para recoger los resultados que no cumplen los objetivos
         } else {
           resultado = "No cumple";
         }
+
+        //Abre una ventana emergente con el resultado
         alert(resultado);
       }
       
+      //Así se inicializa la función antes escrita
       comparar();
 
     </script>

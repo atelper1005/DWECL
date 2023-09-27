@@ -5,14 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 1</title>
     <script>
+      //window.onload carga el script directamente cuando se inicia la página
       window.onload = function comparar() {
+
+        //Variables
         var n1 = prompt("introduce el primer numero ");
         var n2 = prompt("introduce el segundo numero ");
 
+        //Con if-elseif comparamos varias opciones de resultados
         if (parseInt(n1) > parseInt(n2)) {
-          document.write("El primer numero es mas grande que el segundo");
+          document.write(n1 + " es mayor que " + n2);
         } else if (parseInt(n1) < parseInt(n2)) {
-          document.write("El segundo numero es mas grande que el primero");
+          document.write(n2 + " es mayor que " + n1);
         } else {
           document.write("Son iguales");
         }

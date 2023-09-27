@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejercicio 7</title>
-</head>
-<body>
+  </head>
+  <body>
     <script>
-        function factorial() {
-            var num = prompt("Introduce un número");
-            var resultado = 1;
 
-            for (i = num; i >= 2; i--) {
-                resultado = resultado * i;
-            }
+      function factorial() {
 
-            alert(resultado);
+        var num = prompt("Introduce un número");
+        var resultado = 1;
+
+        /*Con un bucle for conseguimos formar el factorial ya que va desde
+        el número que se introduce hasta el 1 */
+        for (i = num; i >= 2; i--) {
+          resultado = resultado * i;
         }
-        factorial();
+
+        alert(resultado);
+
+      }
+
+      factorial();
+
     </script>
-</body>
+  </body>
 </html>

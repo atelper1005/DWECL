@@ -8,12 +8,31 @@
 <body>
     <script>
         function ecuacion() {
+
+            //Coeficientes de la ecuación
             var a = prompt("Introduce el coeficiente a: ");
             var b = prompt("Introduce el coeficiente b: ");
             var c = prompt("Introduce el coeficiente c: ");
-
             
+            //Variables de los resultados
+            var x;
+            var y;
+            
+            //Resoluciones
+            x = (-b + Math.pow(Math.pow(b,2) - 4*a*c, 0.5))/(2*a);
+            y = (-b - Math.pow(Math.pow(b,2) - 4*a*c, 0.5))/(2*a);
+
+            //Escritura de los resultados
+            document.write("La solución x es: " + x + "<br>");
+            document.write("La solución y es: " + y + "<br>");
         }
+
+        ecuacion();
+
+        /* Si el coeficiente a tiene el valor 0 es cuando llegan los problemas
+        ya que una de las soluciones da infinito y la otra el programa la clasifica
+        como un NaN (Not-a-Number) */
+
     </script>
 </body>
 </html>
