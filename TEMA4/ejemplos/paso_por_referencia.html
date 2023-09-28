@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+      var objetoA = {a:1 , b : "Hola"}
+        function nombreFuncion (x) {
+          // código a ejecutar;
+          x.a = 3 ;
+          return "Valor de x = " + x.a;
+        }
+	  alert ("Valor de a = " + objetoA.a );     //Vale 1 porque no lo hemos mandado a la funcion
+        alert (nombreFuncion(objetoA));         //Vale 3 porque lo hemos mandado a la funcion
+        alert ("Valor de a = " + objetoA.a );   //Vale 3 de nuevo porque se ha guardado el valor por el paso anterior
+        </script>
+</head>
+<body>
+</body>
+</html>

@@ -13,6 +13,10 @@
         var num = prompt("Introduce un número");
         var resultado = 1;
 
+        if (a < 0) {
+          alert("El número debe ser mayor de 0");
+        } else {
+
         /*Con un bucle for conseguimos formar el factorial ya que va desde
         el número que se introduce hasta el 1 */
         for (i = num; i >= 2; i--) {
@@ -20,7 +24,7 @@
         }
 
         alert(resultado);
-
+      }
       }
 
       factorial();
