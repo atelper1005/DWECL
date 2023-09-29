@@ -1,11 +1,87 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tarea 1 - Web Figuras</title>
     <script src="menu.js"></script>
 </head>
 <body onload="mostrarMenu();">
+=======
+    <title>Calculadora de Geometría</title>
+</head>
+<body>
+    <h1>Calculadora de Geometría</h1>
+    <button onclick="mostrarMenu()">Mostrar Menú</button>
+
+    <script>
+        function mostrarMenu() {
+            var opcion = prompt("Elija una opción:\n\nF1: Elegir figura geométrica\nF2: Ingresar medidas\nF3: Calcular volumen\nF4: Calcular área\nF5: Finalizar programa");
+
+            if (opcion === null) {
+                return; // El usuario canceló la ventana emergente
+            }
+
+            switch (opcion) {
+                case "F1":
+                    elegirFigura();
+                    break;
+                case "F2":
+                    ingresarMedidas();
+                    break;
+                case "F3":
+                    calcularVolumen();
+                    break;
+                case "F4":
+                    calcularArea();
+                    break;
+                case "F5":
+                    alert("Programa finalizado.");
+                    break;
+                default:
+                    alert("Opción no válida. Por favor, elija una opción válida.");
+                    mostrarMenu();
+                    break;
+            }
+        }
+
+        function elegirFigura() {
+            var figura = prompt("Elija una figura geométrica:\n\nCubo\nEsfera\nCilindro");
+
+            if (figura === null) {
+                mostrarMenu(); // El usuario canceló la ventana emergente, volvemos al menú
+                return;
+            }
+
+            // Suponemos que aquí almacenaríamos la elección del usuario en una variable local
+            // Por ejemplo, podríamos usar una variable llamada "figuraElegida"
+            var figuraElegida = figura;
+
+            mostrarMenu();
+        }
+
+        function ingresarMedidas() {
+            // Suponemos que aquí solicitaríamos las medidas necesarias para la figura elegida
+            // y las almacenaríamos en variables locales
+
+            mostrarMenu();
+        }
+
+        function calcularVolumen() {
+            // Suponemos que aquí calcularíamos el volumen de la figura elegida
+            // utilizando las medidas almacenadas previamente y lo mostraríamos en una ventana emergente
+
+            mostrarMenu();
+        }
+
+        function calcularArea() {
+            // Suponemos que aquí calcularíamos el área de la figura elegida
+            // utilizando las medidas almacenadas previamente y lo mostraríamos en una ventana emergente
+
+            mostrarMenu();
+        }
+    </script>
+>>>>>>> 97a73114959ad9a7e8832b37963281940e436e73
 </body>
 </html>
