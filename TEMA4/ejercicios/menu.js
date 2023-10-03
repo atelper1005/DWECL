@@ -1,28 +1,90 @@
+function() {
 function mostrarMenu() {
     var opcion = Number(prompt("Elija una opción: \n1. Elegir figura geométrica \n2. Ingresar medidas \n3. Calcular volumen \n4. Calcular área \n5. Finalizar programa"));
+    var figura;
+    var dimensiones;
+
+    function elegirFigura() {
+        figura = prompt("Elige una figura geométrica: cubo, esfera, cilindro");
+    }
+    
+    function ingresarMedidas() {
+        switch (figura) {
+            case 'cubo':
+                dimensiones = prompt("Introduce la longitud del lado del cubo");
+                break;
+            case 'esfera':
+                dimensiones = prompt("Introduce el radio de la esfera");
+                break;
+            case 'cilindro':
+                dimensiones = prompt("Introduce el radio y la altura del cilindro, separados por una coma");
+                break;
+            default:
+                alert("Figura no reconocida");
+                f1();
+        }
+    }
+
+     function calcularVolumen() {
+        let volumen;
+        switch (figura) {
+            case 'cubo':
+                volumen = Math.pow(dimensiones, 3);
+                break;
+            case 'esfera':
+                volumen = (4/3) * Math.PI * Math.pow(dimensiones, 3);
+                break;
+            case 'cilindro':
+                let [radio, altura] = dimensiones.split(',').map(Number);
+                volumen = Math.PI * Math.pow(radio, 2) * altura;
+                break;
+        }
+        alert(`El volumen de la ${figura} es ${volumen}`);
+    }
+
+    function calcularArea() {
+        let area;
+        switch (figura) {
+            case 'cubo':
+                area = 6 * Math.pow(dimensiones, 2);
+                break;
+            case 'esfera':
+                area = 4 * Math.PI * Math.pow(dimensiones, 2);
+                break;
+            case 'cilindro':
+                let [radio, altura] = dimensiones.split(',').map(Number);
+                area = 2 * Math.PI * radio * (radio + altura);
+                break;
+        }
+        alert(`El área de la ${figura} es ${area}`);
+    }
 
     if (opcion === null) {
         return;
     }
 
     switch (opcion) {
-        case 1:
+        case '1':
             elegirFigura();
+            mostrarMenu();
             break;
 
-        case 2:
+        case '2':
             ingresarMedidas();
+            mostrarMenu();
             break;
 
-        case 3:
+        case '3':
             calcularVolumen();
+            mostrarMenu();
             break;
 
-        case 4:
+        case '4':
             calcularArea();
+            mostrarMenu();
             break;
 
-        case 5:
+        case '5':
             alert("Programa finalizado");
             break;
 
@@ -32,56 +94,7 @@ function mostrarMenu() {
             break;
     }
 }
-
-function elegirFigura() {
-    var figura = Number(prompt("Elija una figura geométrica: \n1. Cubo \n2. Esfera \n3. Cilindro"));
-
-    if(figura === null) {
-        alert("Opción no valida, elija de nuevo");
-        mostrarMenu();
-        return;
-    } else if(figura === 1) {
-        alert("Cubo seleccionado")
-        
-    } else if(figura === 2) {
-        alert("Esfera seleccionada")
-        
-    } else if(figura === 3) {
-        alert("Cilindro seleccionado")
-        
-    } else {
-        alert("Opción no válida, elija de nuevo")
-        return elegirFigura();
-    }
-
-    mostrarMenu();
+    
 }
 
-function ingresarMedidas() {
-
-    if(elegirFigura() == 1) {
-        prompt("Ingrese el lado del cubo (en cm): ");
-        
-    } else if (figuraElegida == 2) {
-        prompt("Ingrese el radio de la esfera (en cm): ");
-        
-    } else if (figuraElegida == 3) {
-        prompt("Ingrese radio del cilindro (en cm)");
-        prompt("Ingrese la altura del cilindro (en cm): ");
-        
-    }
-
-    mostrarMenu();
-}
-
-function calcularVolumen() {
-    // utilizando las medidas almacenadas previamente y lo mostraríamos en una ventana emergente
-
-    mostrarMenu();
-}
-
-function calcularArea() {
-    // utilizando las medidas almacenadas previamente y lo mostraríamos en una ventana emergente
-
-    mostrarMenu();
-}
+mostrarMenu();
