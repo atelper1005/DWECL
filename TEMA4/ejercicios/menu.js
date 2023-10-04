@@ -10,11 +10,11 @@ function introducirValores(figura) {
         var lado = Number(prompt("Introduzca el Lado del Cubo: "));
         return lado;
     } else if (figura == 2) {
-        var radio = Number(prompt("Introduzca el Radio de la Esfera: "));
+        var radio = Number(prompt("Introduzca el Radio de la Esfera(en cm): "));
         return radio;
     } else if (figura == 3) {
-        var radio = Number(prompt("Introduzca el Radio del Cilindro: "));
-        var altura = Number(prompt("Introduzca la Altura del Cilindroo: "));
+        var radio = Number(prompt("Introduzca el Radio del Cilindro (en cm): "));
+        var altura = Number(prompt("Introduzca la Altura del Cilindro(en cm): "));
         return [radio, altura];
     } else {
         alert("Datos Incorrectos");
@@ -24,13 +24,13 @@ function introducirValores(figura) {
 function calcularVolumen(figura, lado, radio, altura) {
     if (figura == 1) {
         // Cálculo del volumen del cubo
-        var vol = (Math.pow(lado, 3));
+        var vol = Math.pow(lado, 3);
     } else if (figura == 2) {
         // Cálculo del volumen de la esfera
-        var vol = (4/3) * Math.PI * (Math.pow(radio, 3));
+        var vol = (4/3) * Math.PI * Math.pow(radio, 3);
     } else if (figura == 3) {
         // Cálculo del volumen del cilindro
-        var vol = Math.PI * (Math.pow(radio, 2)) * altura;
+        var vol = Math.PI * Math.pow(radio, 2) * altura;
     }
     return vol;
 }
