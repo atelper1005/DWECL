@@ -1,4 +1,5 @@
-/**     Moda
+/**     
+ *                              Moda
  *  a) No tenga moda
  *  b) Solamente se repite un número respecto a los demás el cual sería ese
  *  c) Existen 2 modas =  2 opciones:
@@ -6,8 +7,6 @@
  *      c.1) Si existe al menos algún valor entre ellos --- serían ambos las modas
  *      c.2) Si no existe ningún valor entre ellos --- la moda sería la media de ambos valores
  */
-
-
 
         function calcularResultados() {
             // Obtén los números ingresados por el usuario
@@ -28,14 +27,16 @@
                 return;
             }
 
+            //console.log(numeros);
+
             // Calcula la media
-            var media = alert("La media es " + calcularMedia(numeros));
+            alert("La media es " + calcularMedia(numeros));
 
             // Calcula el rango
-            var rango = alert("El rango es " + calcularRango(numeros));
+            alert("El rango es " + calcularRango(numeros));
 
             // Calcula la moda
-            var moda = alert("La moda es " + calcularModa(numeros));
+            alert("La moda es " + calcularModa(numeros));
 
         }
 
@@ -47,8 +48,18 @@
         }
 
         function calcularRango(numeros) {
-            var max = Math.max.apply(null, numeros);
-            var min = Math.min.apply(null, numeros);
+            var min = numeros[0];
+            var max = numeros[0];
+
+            for(var i = 1; i < numeros.length; i++) {
+                if(numeros[i] < min) {
+                    min = numeros[i];
+                }
+                if(numeros[i] > max) {
+                    max = numeros[i];
+                }
+            }
+
             return max - min;
         }
 
@@ -74,3 +85,5 @@
 
             return moda;
         }
+
+calcularResultados();
