@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Para la moda:
+    a) Puede no haber moda
+    b) Se repite un solo número más que los demás por lo tanto ese es la moda
+    c) Se repiten dos números 	  → Si existe algún valor entre ellos, serían ambos la moda
+                                  → Se suman ambos valores y la mitad sería la moda   
+
+	-->
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 Tema 5</title>
+  </head>
+  <script>
+    function introducirValores() {
+      var arrayNumeros = [];
+
+      while (true) {
+        nuevoNumero = Number(
+          prompt(
+            "Introduzca un número para añadirlo o una letra terminar de introducir números"
+          )
+        );
+        if (
+          isNaN(nuevoNumero) ||
+          nuevoNumero == 0 ||
+          nuevoNumero < 0 ||
+          nuevoNumero == null
+        ) {
+          break;
+        } else {
+          arrayNumeros.push(nuevoNumero);
+        }
+      }
+      alert(arrayNumeros);
+      calcularMedia(arrayNumeros);
+      calcularRango(arrayNumeros);
+      calcularModa(arrayNumeros);
+    }
+
+    function calcularMedia(arrayNumeros) {
+      var sumaNumeros = Number(0);
+      var media = Number(arrayNumeros.length);
+
+      for (i = 0; i < arrayNumeros.length; i++) {
+        sumaNumeros += arrayNumeros[i];
+      }
+
+      alert("La Media de la serie de números es: " + sumaNumeros / media);
+    }
+
+    function calcularRango(arrayNumeros) {
+      var numMayor = Number(0);
+      var numMenor;
+      var rango = Number(0);
+
+      for (i = 0; i < arrayNumeros.length; i++) {
+        if (arrayNumeros[i] > numMayor) {
+          numMayor = arrayNumeros[i];
+        }
+      }
+
+      numMenor = numMayor;
+
+      for (i = 0; i < arrayNumeros.length; i++) {
+        if (arrayNumeros[i] < numMenor) {
+          numMenor = arrayNumeros[i];
+        }
+      }
+
+      rango = numMayor - numMenor;
+
+      alert("El Rango es: " + rango);
+    }
+
+    function calcularModa(arrayNumeros) {
+      var max = 0;
+      var modas = "";
+      var contaModa = 0;
+      var existeDistinto = false;
+      var enMedio = false;
+      var b = []; //Guarda las repeticiones de cada valor
+      var m = []; //Guarda las modas para casos de adyacencia
+
+      for (var i = 0; i < arrayNumeros.length; i++) {
+               if (b[arrayNumeros[i]] == undefined) {
+                   b[arrayNumeros[i]] = 1;
+               } else {
+                   b[arrayNumeros[i]]++;
+               }
+               if(b[arrayNumeros[i]] >= max) {
+              
+               }
+               if(b[arrayNumeros[i]] < max) {
+                   existeDistinto = true;
+               }
+               if(b[arrayNumeros[i]] == max && existeDistinto == true) {
+                   modas += " , " + s[i];
+                   contaModa ++;
+                   m[contaModa]=num[i];
+                   b[num[i]] = 0 // ---- Para que no sume de nuevo a la cadena modas
+               }
+              
+               if(contaModa == 2) { // ----Calcula la media de 2 modas adyacentes
+                   for(var i = 0; i < num.length; i++) {
+                       
+                   }
+               }
+               if(modas != "") {
+                alert ("La moda es " + modas);
+               } else {
+                alert ("No tiene moda")
+               }
+        }
+    }
+
+    introducirValores();
+  </script>
+  <body></body>
+</html>
