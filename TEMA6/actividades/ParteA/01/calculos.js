@@ -1,11 +1,9 @@
 /**
- *                              Moda
- *  a) No tenga moda
- *  b) Solamente se repite un número respecto a los demás el cual sería ese
- *  c) Existen 2 modas =  2 opciones:
+ *                              Mediana
+ *   Existen 2 opciones de mediana:
  *
- *      c.1) Si existe al menos algún valor entre ellos --- serían ambos las modas
- *      c.2) Si no existe ningún valor entre ellos --- la moda sería la media de ambos valores
+ *      1) Si existe un valor central, ese es la mediana
+ *      2) Si hay 2 valores centrales, hacer la media de ambos valores para hallar la mediana
  */
 
 function calcularResultados() {
