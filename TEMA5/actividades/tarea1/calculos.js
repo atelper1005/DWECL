@@ -67,6 +67,7 @@
             var conteo = {};
             var moda = [];
             var maxFrecuencia = 0;
+
             /**
              * var max = 0;
              * var modas = "";
@@ -101,6 +102,7 @@
              *      }
              *  }
              * }
+             * 
              */
 
             // Contar la frecuencia de cada número
