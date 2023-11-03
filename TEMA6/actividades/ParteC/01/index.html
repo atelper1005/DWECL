@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea 3 Tema 6(Parte C)</title>
+</head>
+<body>
+
+    <script>
+
+        class Empleado {
+            #edad;
+            constructor(nombre, apellido, edad) {
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.#edad = edad;
+            }
+            muestra() {
+                return this.nombre + this.apellido + this.#edad;
+            }
+        }
+
+        class Profesor extends Empleado {
+            constructor(nombre, apellido, edad, cargo) {
+                super(nombre, apellido, edad);
+                this.cargo = cargo;
+            }
+
+            cargoMuestra() {
+                return this.cargo;
+            }
+        }
+
+        var profesor = new Profesor("Manolito ", "Perez ", 35, "Profesor de Matemáticas");
+        var mensaje = profesor.muestra() + "\n" + profesor.cargoMuestra();
+        
+        alert(mensaje);
+
+    </script>
+
+</body>
+</html>
