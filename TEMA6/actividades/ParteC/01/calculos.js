@@ -1,14 +1,16 @@
 class Articulo {
-  static contador = 0;
 
   constructor(nombre, precio, cantidad) {
-    this.codigo = Articulo.generarCodigo();
+    this.codigo = this.generarCodigo();
     this.nombre = nombre;
     this.precio = precio;
     this.cantidad = cantidad;
   }
 
-  static generarCodigo() {
+  generarCodigo() {
+    if (!Articulo.contador) {
+      Articulo.contador = 0;
+    }
     Articulo.contador++;
     return Articulo.contador;
   }
@@ -47,7 +49,7 @@ class Cesta {
   }
 
   borrarArticulo(codigo) {
-    const nuevosArticulos = this.articulos.filter((articulo) => articulo.codigo !== codigo);
+    var nuevosArticulos = this.articulos.filter((articulo) => articulo.codigo !== codigo);
 
     if (nuevosArticulos.length === this.articulos.length) {
       alert("No se encontró ningún artículo con ese código en la cesta.");
@@ -63,46 +65,46 @@ class Cesta {
       alert("La cesta ha sido vaciada.");
     }
   }
-}
 
-function mostrarMenu() {
-  var cesta = new Cesta();
+  mostrarMenu() {
 
-  while (true) {
-    const opcion = prompt(
-      "Menú:\n" +
-      "1. Ver cesta\n" +
-      "2. Insertar un artículo\n" +
-      "3. Borrar un artículo\n" +
-      "4. Vaciar cesta\n" +
-      "5. Salir\n" +
-      "Ingrese el número de la opción:"
-    );
-
-    switch (opcion) {
-      case "1":
-        cesta.verCesta();
-        break;
-      case "2":
-        var nombre = prompt("Ingrese el nombre del artículo:");
-        var precio = parseFloat(prompt("Ingrese el precio del artículo:"));
-        var cantidad = parseInt(prompt("Ingrese la cantidad del artículo:"));
-        cesta.insertarArticulo(nombre, precio, cantidad);
-        break;
-      case "3":
-        var codigo = parseInt(prompt("Ingrese el código del artículo que desea borrar:"));
-        cesta.borrarArticulo(codigo);
-        break;
-      case "4":
-        cesta.vaciarCesta();
-        break;
-      case "5":
-        alert("Gracias por usar la simulación de la cesta de compra.");
-        return;
-      default:
-        alert("Opción no válida. Por favor, elija una opción del 1 al 5.");
+    while (true) {
+      const opcion = prompt(
+        "Menú:\n" +
+        "1. Ver cesta\n" +
+        "2. Insertar un artículo\n" +
+        "3. Borrar un artículo\n" +
+        "4. Vaciar cesta\n" +
+        "5. Salir\n" +
+        "Ingrese el número de la opción:"
+      );
+  
+      switch (opcion) {
+        case "1":
+          this.verCesta();
+          break;
+        case "2":
+          var nombre = prompt("Ingrese el nombre del artículo:");
+          var precio = parseFloat(prompt("Ingrese el precio del artículo:"));
+          var cantidad = parseInt(prompt("Ingrese la cantidad del artículo:"));
+          this.insertarArticulo(nombre, precio, cantidad);
+          break;
+        case "3":
+          var codigo = parseInt(prompt("Ingrese el código del artículo que desea borrar:"));
+          this.borrarArticulo(codigo);
+          break;
+        case "4":
+          this.vaciarCesta();
+          break;
+        case "5":
+          alert("Gracias por comprar.");
+          return;
+        default:
+          alert("Opción no válida. Por favor, elija una opción del 1 al 5.");
+      }
     }
   }
 }
 
-mostrarMenu();
+var cesta = new Cesta;
+cesta.mostrarMenu();
