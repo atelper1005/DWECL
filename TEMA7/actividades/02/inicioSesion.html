@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión</title>
+</head>
+<body>
+
+<form id="formulario">
+  <label for="usuario">Usuario:</label>
+  <input type="text" id="usuario" required>
+
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" id="contrasena" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+  title="Debe contener al menos 8 caracteres, una mayúscula, una minúscula y un número">
+
+  <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
+</form>
+
+<script>
+  // Clase para gestionar el inicio de sesión
+  class InicioSesion {
+    #usuarios = [
+      { usuario: 'usuario1', contrasena: 'Password1' },
+      { usuario: 'usuario2', contrasena: 'SecurePass2' },
+      { usuario: 'usuario3', contrasena: 'StrongP@ss3' }
+    ];
+
+    iniciarSesion(usuario, contrasena) {
+      var usuarioValido = this.#usuarios.find(iniciar => iniciar.usuario === usuario && iniciar.contrasena === contrasena);
+
+      if (usuarioValido) {
+        alert('Se ha iniciado sesión');
+        // Aquí podrías redirigir a otra página o realizar otras acciones después de iniciar sesión
+      } else {
+        alert('No coinciden usuario o contraseña');
+      }
+    }
+  }
+
+  // Función para obtener los valores de usuario y contraseña y realizar la validación
+  function iniciarSesion() {
+    var usuario = document.getElementById('usuario').value;
+    var contrasena = document.getElementById('contrasena').value;
+
+    var inicioSesion = new InicioSesion();
+    inicioSesion.iniciarSesion(usuario, contrasena);
+  }
+</script>
+
+</body>
+</html>

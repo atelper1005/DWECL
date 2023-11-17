@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea1 - Tema7</title>
+    <style>
+      input:invalid {
+        border: 1px solid red;
+      }
+      input:valid {
+        border: 1px solid green;
+      }
+    </style>
+
+    <script>
+      class Vehiculo { 
+       #validaMatricula() {
+         var matricula = document.getElementById("matriculainput");
+         if (matricula.validity.patternMismatch) {
+           matr.setCustomValidity("Introduzca una matrícula válida (4 números y 3 letras)");
+         } else {
+           matricula.setCustomValidity("");
+         }
+       }
+
+       #validaDNI(){
+         var dniValid = document.getElementById("idDNI");
+         if (dniValid.validity.patternMismatch){
+           dniValid.setCustomValidity("Introduzca un formato de DNI valido");
+         } else {
+           dniValid.setCustomValidity("");
+         }
+       }
+       
+       // Metodo 
+       #comprobarDNI() {
+         var labelDNI = document.getElementById("dniLabel");
+         var inputDNI = document.getElementById("idDNI");
+   
+         inputDNI.addEventListener('focus', () => {
+          labelDNI.textContent = "Editando DNI...";
+         });
+   
+         inputDNI.addEventListener('blur', () => {
+          labelDNI.textContent = "DNI:";
+         });
+       }
+       #modificaDNI() {
+         var mod = document.getElementById("dniLabel").textContent = "Editando DNI....";
+       }
+   
+       #dniOriginal() {
+         var dni = document.getElementById("dniLabel").textContent = "DNI:";
+       }
+   
+       eventos() {
+         var matr = document.getElementById("matriculainput");
+         matr.addEventListener("keyup", this.#validaMatricula.bind(this));
+   
+         var dni = document.getElementById("idDNI");
+         dni.addEventListener("focus", this.#modificaDNI.bind(this));
+         dni.addEventListener("blur", this.#dniOriginal.bind(this));
+
+         var dniValid = document.getElementById("idDNI");
+         dniValid.addEventListener("keyup",this.#validaDNI.bind(this));
+       }
+     }
+   
+     // Instancia la clase BajaVehiculo
+     var cargarEventos = new Vehiculo();
+     window.onload = function(){
+       cargarEventos.eventos()
+     };
+ </script>
+</head>
+
+<h1>Solicitud de baja de Vehiculo</h1>
+<section class="Container">
+<body>
+
+    <form>
+        <section class="Datosvehiculo">
+            <h3>Datos del vehiculo</h3>
+        <section class="mb-3">
+          <label for="Matricula" class="form-label">Matricula:</label>
+          <input class="form-control" id="matriculainput" name="matricula" pattern="[0-9]{4}[A-Za-z]{3}" required>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="Fechamatriculacion" class="form-label">Fecha matriculacion:</label>
+          <input class="form-control" name="fechaMtr" type="date" required>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="bastidor" class="form-label">6 ultimos dígitos (nº bastidor)</label>
+          <input class="form-control" name="bastidor" type="text" pattern="\d{6}$" required>
+        </section>
+    </section>
+        <br>
+        <section class="datosTitular">
+            <h3>Datos del Titular</h3>
+        <section class="mb-3">
+          <label for="Nombre" class="form-label">Nombre:</label>
+          <input class="form-control" name="nombre" type="text" required>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="Apellidos" class="form-label">Apellidos:</label>
+          <input class="form-control" name="apellidos" type="text" required>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="Domicilio" class="form-label">Domicilio:</label>
+          <input class="form-control" name="Domicilio" type="text" required>
+        </section>
+        <br>
+        <section class="mb-3">
+            <label for="DNI" class="form-label" id="dniLabel">DNI:</label>
+            <input type="text" id="idDNI" name="dni" pattern="^\d{8}[a-zA-Z]$" required>
+            <br>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="Email" class="form-label">Correo electronico:</label>
+          <input class="form-control" name="email" type="email" required>
+        </section>
+        <br>
+        <section class="mb-3">
+          <label for="Tlf" class="form-label">Tlf:</label>
+          <input class="form-control" type="text" name="tlf" pattern="\d{9}$" required>
+        </section>
+        <br>
+        <section class="tipoBaja">Tipo de baja:
+        <section class="form-check" required>
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Temporal
+            </label>
+          </section>
+        <section class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Definitiva
+            </label>
+          </section>
+        </section>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </section>
+        </section>
+      </form>
+    </section>
+</section>
+</section>
+    </section>
+</body>
+</html>
