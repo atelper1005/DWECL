@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manejo Documentos XML</title>
+  </head>
+  <body>
+    <script>
+      var cadena = `<?xml version="1.0" encoding="UTF-8"?>
+ <cine>
+    <película categoría="acción">
+           <título idioma="inglés">Mad Max</título>
+            <director>George Miller</director>
+            <estreno>15 mayo 2015</estreno>
+            <reparto>Charlize Theron</reparto>
+     </película>
+     <película categoría="animación">
+            <título idioma="inglés">Inside Out</título>
+       	<reparto>Amy Poehler</reparto>
+    </película>
+ </cine>`;
+    var xmlDoc = new DOMParser().parseFromString(cadena, "text/xml");
+    var pelicula = xmlDoc.getElementsByTagName('película');
+    var reparto = xmlDoc.getElementsByTagName('reparto');
+    var txt = "";
+    for (i of pelicula) {
+        for(j of reparto) {
+            txt += j.childNodes[0].nodeValue + "\n"
+        }
+    } 
+    alert(txt);
+    </script>
+  </body>
+</html>

@@ -85,7 +85,7 @@
                   miNodoBoton.classList.add('btn', 'btn-primary');
                   miNodoBoton.textContent = '+';
                   miNodoBoton.setAttribute('marcador', info.id);
-                  miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
+                  miNodoBoton.addEventListener('click', anadirProductoAlCarrito);
                   // Insertamos
                   miNodoCardBody.appendChild(miNodoImagen);
                   miNodoCardBody.appendChild(miNodoTitle);
@@ -99,7 +99,7 @@
           /**
           * Evento para añadir un producto al carrito de la compra
           */
-          function anyadirProductoAlCarrito(evento) {
+          function anadirProductoAlCarrito(evento) {
               // Anyadimos el Nodo a nuestro carrito
               carrito.push(evento.target.getAttribute('marcador'))
               // Actualizamos el carrito
