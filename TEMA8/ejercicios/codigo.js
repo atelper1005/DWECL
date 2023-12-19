@@ -23,7 +23,6 @@ class ContProductos {
 class Cesta {
   constructor() {
       this.carrito = [];
-      this.divisa = '€';
       this.contProductos = new ContProductos();
       this.DOMitems = document.querySelector('#items');
       this.DOMcarrito = document.querySelector('#carrito');
@@ -48,12 +47,12 @@ class Cesta {
           miNodoImagen.setAttribute('src', info.imagen);
           const miNodoPrecio = document.createElement('p');
           miNodoPrecio.classList.add('card-text');
-          miNodoPrecio.textContent = `${info.precio}${this.divisa}`;
+          miNodoPrecio.textContent = `${info.precio}€`;
           const miNodoBoton = document.createElement('button');
           miNodoBoton.classList.add('btn', 'btn-primary');
           miNodoBoton.textContent = 'Añadir';
           miNodoBoton.setAttribute('marcador', info.id);
-          miNodoBoton.addEventListener('click', () => this.anadirProductoAlCarrito(info.id));
+          miNodoBoton.addEventListener('click', () => this.anadirProductoCarrito(info.id));
           miNodoCardBody.appendChild(miNodoImagen);
           miNodoCardBody.appendChild(miNodoTitle);
           miNodoCardBody.appendChild(miNodoPrecio);
@@ -63,7 +62,7 @@ class Cesta {
       });
   }
 
-  anadirProductoAlCarrito(id) {
+  anadirProductoCarrito(id) {
       this.carrito.push(id);
       this.renderizarCarrito();
       this.guardarCarritoEnLocalStorage();
@@ -71,23 +70,36 @@ class Cesta {
 
   renderizarCarrito() {
     this.DOMcarrito.textContent = '';
-    const carritoSinDuplicados = [...new Set(this.carrito)];
-    carritoSinDuplicados.forEach((item) => {
-        // Busca el producto directamente en la lista de productos
-        const miItem = this.contProductos.productos.find((itemProducto) => itemProducto.id === parseInt(item));
-        const numeroUnidadesItem = this.carrito.reduce((total, itemId) => (itemId === item ? total + 1 : total), 0);
-        const miNodo = document.createElement('li');
-        miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
-        miNodo.textContent = `${numeroUnidadesItem} x ${miItem.nombre} - ${miItem.precio}${this.divisa}`;
-        const miBoton = document.createElement('button');
-        miBoton.classList.add('btn', 'btn-danger', 'mx-5');
-        miBoton.textContent = 'X';
-        miBoton.style.marginLeft = '1rem';
-        miBoton.dataset.item = item;
-        miBoton.addEventListener('click', () => this.borrarItemCarrito(item));
-        miNodo.appendChild(miBoton);
-        this.DOMcarrito.appendChild(miNodo);
+
+    // Objeto para hacer un seguimiento de los productos únicos y su cantidad
+    const productosUnicos = {};
+
+    // Calcular la cantidad de cada producto en el carrito
+    this.carrito.forEach((item) => {
+        productosUnicos[item] = (productosUnicos[item] || 0) + 1;
     });
+
+    // Renderizar el carrito
+    for (const itemId in productosUnicos) {
+        if (productosUnicos.hasOwnProperty(itemId)) {
+            var cantidad = productosUnicos[itemId];
+            const miItem = this.contProductos.productos.find((itemProducto) => itemProducto.id === parseInt(itemId));
+
+            const miNodo = document.createElement('li');
+            miNodo.classList.add('list-group-item', 'text-right', 'mx-2');
+            miNodo.textContent = `${cantidad} x ${miItem.nombre} - ${miItem.precio}€`;
+
+            const miBoton = document.createElement('button');
+            miBoton.classList.add('btn', 'btn-danger', 'mx-5');
+            miBoton.textContent = 'X';
+            miBoton.style.marginLeft = '1rem';
+            miBoton.dataset.item = itemId;
+            miBoton.addEventListener('click', () => this.borrarItemCarrito(itemId));
+
+            miNodo.appendChild(miBoton);
+            this.DOMcarrito.appendChild(miNodo);
+        }
+    }
     this.DOMtotal.textContent = this.calcularTotal();
     this.DOMtotalIVA.textContent = this.calcularTotalIVA();
 }
