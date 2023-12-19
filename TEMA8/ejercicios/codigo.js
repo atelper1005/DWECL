@@ -28,6 +28,7 @@ class Cesta {
       this.DOMitems = document.querySelector('#items');
       this.DOMcarrito = document.querySelector('#carrito');
       this.DOMtotal = document.querySelector('#total');
+      this.DOMtotalIVA = document.querySelector('#totalIVA')
       this.DOMbotonVaciar = document.querySelector('#boton-vaciar');
       this.miLocalStorage = window.localStorage;
   }
@@ -88,6 +89,7 @@ class Cesta {
         this.DOMcarrito.appendChild(miNodo);
     });
     this.DOMtotal.textContent = this.calcularTotal();
+    this.DOMtotalIVA.textContent = this.calcularTotalIVA();
 }
 
   borrarItemCarrito(id) {
@@ -101,6 +103,13 @@ class Cesta {
         const miItem = this.contProductos.productos.find((itemProducto) => itemProducto.id === parseInt(item));
         return total + miItem.precio;
     }, 0).toFixed(2);
+}
+
+calcularTotalIVA() {
+    var totalSinIVA = this.calcularTotal();
+    const iva = 0.21;
+    var totalConIVA = totalSinIVA * (1 + iva);
+    return totalConIVA.toFixed(2);
 }
 
   vaciarCarrito() {
