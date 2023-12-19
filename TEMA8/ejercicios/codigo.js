@@ -53,7 +53,7 @@ class Cesta {
           miNodoBoton.classList.add('btn', 'btn-primary');
           miNodoBoton.textContent = 'Añadir';
           miNodoBoton.setAttribute('marcador', info.id);
-          miNodoBoton.addEventListener('click', () => this.anyadirProductoAlCarrito(info.id));
+          miNodoBoton.addEventListener('click', () => this.anadirProductoAlCarrito(info.id));
           miNodoCardBody.appendChild(miNodoImagen);
           miNodoCardBody.appendChild(miNodoTitle);
           miNodoCardBody.appendChild(miNodoPrecio);
@@ -63,7 +63,7 @@ class Cesta {
       });
   }
 
-  anyadirProductoAlCarrito(id) {
+  anadirProductoAlCarrito(id) {
       this.carrito.push(id);
       this.renderizarCarrito();
       this.guardarCarritoEnLocalStorage();
