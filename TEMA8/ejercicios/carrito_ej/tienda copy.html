@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script>
+        class Producto {
+    constructor(id, nombre, precio, imagen) {
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.imagen = imagen;
+    }
+}
+
+class ContProductos {
+    constructor() {
+        this.productos = [
+            new Producto(1, 'Zapatos', 45, 'https://loremflickr.com/320/240/shoes'),
+            new Producto(2, 'Móvil', 199.99, 'https://loremflickr.com/320/240/smartphone'),
+            new Producto(3, 'Vestido', 30, 'https://loremflickr.com/320/240/dress'),
+            new Producto(4, 'Ratón inalámbrico', 15.5, 'https://loremflickr.com/320/240/wireless_mouse'),
+            new Producto(5, 'Maceta', 27.9, 'https://loremflickr.com/320/240/flowerpot'),
+            new Producto(6, 'Collar', 50, 'https://loremflickr.com/320/240/necklace')
+        ];
+    }
+}
+
+class Carrito {
+    constructor() {
+        this.items = [];
+    }
+
+    agregarItem(producto, cantidad) {
+        this.items.push({ producto, cantidad });
+    }
+
+    calcularTotal() {
+        return this.items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
+    }
+}
+
+class CajaCompras {
+    constructor(contProductos) {
+        this.contProductos = contProductos;
+        this.carrito = new Carrito();
+    }
+
+    agregarProducto(productoId, cantidad) {
+        const producto = this.contProductos.productos.find(p => p.id === productoId);
+        if (producto) {
+            this.carrito.agregarItem(producto, cantidad);
+        } else {
+            console.error(`Producto con ID ${productoId} no encontrado.`);
+        }
+    }
+
+    imprimirResumen() {
+        console.log('Resumen de la compra:');
+        this.carrito.items.forEach(item => {
+            console.log(`${item.cantidad} x ${item.producto.nombre} - ${item.producto.precio}€ cada uno`);
+        });
+        console.log(`Total: ${this.carrito.calcularTotal()}€`);
+    }
+}
+
+// Uso del carrito de la compra
+
+const contProductos = new ContProductos();
+const cajaCompras = new CajaCompras(contProductos);
+
+// Agregar productos al carrito
+cajaCompras.agregarProducto(1, 2);
+cajaCompras.agregarProducto(3, 1);
+cajaCompras.agregarProducto(6, 1);
+
+// Imprimir resumen
+cajaCompras.imprimirResumen();
+
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1><img src="C:\xampp\htdocs\DWCL\TEMA8\ejercicios\img\planeta-tierra.png" alt="logo" width="100px" height="100px"/>Amazonas</h1>
+        <h4>Carrito de la compra</h4>
+      </div>
+    <div class="container">
+        <div class="row">
+            <!-- Elementos generados a partir del JSON -->
+            <main id="items" class="col-sm-8 row"></main>
+            <!-- Carrito -->
+            <aside class="col-sm-4">
+                <h2><img src="C:\xampp\htdocs\DWCL\TEMA8\ejercicios\img\carrito-de-compras.png" width="100px"
+                    height="100px" alt="carro">Carrito</h2>
+                <!-- Elementos del carrito -->
+                <ul id="carrito" class="list-group"></ul>
+                <hr>
+                <!-- Precio total -->
+                <p class="text-right">Total + IVA: <span id="total"></span>&euro;</p>
+                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>
