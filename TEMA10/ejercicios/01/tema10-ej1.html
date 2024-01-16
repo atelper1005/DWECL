@@ -2,66 +2,83 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Ejercicio 1 - Tema 10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 - Tema 10 - Consultas en tiempo real</title>
+    <script>
+      // Función conexion AJAX
+      function funAjax(url, fun) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status == 200) {
+            fun(this);
+          }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+      }
+
+      // Función para la lista tipo select
+      function selectList(xhttp) {
+        let obj = JSON.parse(xhttp.responseText);
+        var selec = "<option disabled selected>Selecciona una persona</option>";
+        for (var cliente of obj) {
+          selec += `<option value="${cliente.id}" id="id-${cliente.id}">${cliente.nombre}</option>`;
+        }
+        document.getElementById("lista").innerHTML = selec;
+
+        // Agrega el event listener después de cargar la lista
+        document
+          .getElementById("lista")
+          .addEventListener("change", function(){
+            var id = this.value;
+            funAjax('bd_connect.php',function(xhttp){
+                datosTabla(xhttp,id);
+            })
+          }
+          );
+      }
+
+      // Función tabla con datos de cliente
+      function datosTabla(xhttp,id){
+        let obj = JSON.parse(xhttp.responseText);
+            var tabla = "";
+            for (cliente of obj) {
+              if (cliente.id === Number(id)) {
+                tabla += `
+                            <tr>
+                            <th>ID</th>
+                            <td>${cliente.id}</td>
+                            </tr>
+                            <tr>
+                            <th>Nombre</th>
+                            <td>${cliente.nombre}</td>
+                            </tr>
+                            <tr>
+                            <th>Apellidos</th>
+                            <td>${cliente.apellidos}</td>
+                            <tr>
+                            <th>Ciudad</th>
+                            <td>${cliente.ciudad}</td>
+                            </tr>
+                            `;
+              }
+            }
+            document.getElementById("tabla").innerHTML = tabla;
+      }
+
+     
+
+      window.onload = function(){
+        funAjax('bd_connect.php?clientesId',selectList)
+      };
+    </script>
   </head>
   <body>
-    <h1>Ejercicio 1 - Tema 10</h1>
-    <select id="nombresSelect">
-        <option selected disabled>Seleccione un nombre</option>
-    </select>
-    <div id="detalleNombre"></div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Obtener referencia al select y al div
-        var nombresSelect = document.getElementById("nombresSelect");
-        var detalleNombreDiv = document.getElementById("detalleNombre");
-
-        // Función para cargar nombres desde el servidor
-        function cargarNombres() {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-              const nombres = JSON.parse(xhttp.responseText).nombres;
-              nombres.forEach((nombre) => {
-                const option = document.createElement("option");
-                option.textContent = nombre.nombre;
-                nombresSelect.appendChild(option);
-              });
-            }
-          };
-          xhttp.open("GET", "jsonCon.php", true);
-          xhttp.send();
-        }
-
-        // Función para cargar detalles de un nombre seleccionado
-        function cargarDetallesNombre(nombre) {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
-              const campos = JSON.parse(xhttp.responseText).campos;
-              // Renderizar los campos en el div
-              detalleNombreDiv.innerHTML =
-                '<h2>Detalles</h2><table border="1"><tr><th>ID</th><th>Nombre</th><th>Apellidos</th><th>Ciudad</th></tr>';
-              campos.forEach((campo) => {
-                detalleNombreDiv.innerHTML += `<tr><td>${campo.id}</td><td>${campo.nombre}</td><td>${campo.apellidos}</td><td>${campo.ciudad}</td></tr>`;
-              });
-              detalleNombreDiv.innerHTML += "</table>";
-            }
-          };
-          xhttp.open("GET", `jsonCon.php?nombre=${nombre}`, true);
-          xhttp.send();
-        }
-
-        // Cargar nombres al inicio
-        cargarNombres();
-
-        // Evento al seleccionar un nombre
-        nombresSelect.addEventListener("change", function () {
-          const nombreSeleccionado = nombresSelect.value;
-          cargarDetallesNombre(nombreSeleccionado);
-        });
-      });
-    </script>
+    <h3>Tarea 1 Tema 10</h3>
+    <select id="lista"></select>
+    <br />
+    <table id="tabla" border="1px">
+      <div>La tabla se cargará aquí....</div>
+    </table>
   </body>
 </html>
