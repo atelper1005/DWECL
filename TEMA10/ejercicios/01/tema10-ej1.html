@@ -64,9 +64,9 @@
               }
             }
             document.getElementById("tabla").innerHTML = tabla;
-      }
 
-     
+            document.getElementById("mensajeTabla").style.display = "none";
+      }
 
       window.onload = function(){
         funAjax('jsonCon.php',listaSelect)
@@ -78,6 +78,7 @@
     <select id="lista"></select>
     <br />
     <table id="tabla" border="1px">
+      <div id="mensajeTabla">La tabla aparece aquí...</div>
     </table>
   </body>
 </html>
