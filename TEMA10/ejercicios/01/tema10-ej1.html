@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio 1 - Tema 10 - Consultas en tiempo real</title>
+    <title>Ejercicio 1 - Tema 10</title>
     <script>
       // Función conexion AJAX
       function funAjax(url, fun) {
@@ -18,7 +18,7 @@
       }
 
       // Función para la lista tipo select
-      function selectList(xhttp) {
+      function listaSelect(xhttp) {
         let obj = JSON.parse(xhttp.responseText);
         var selec = "<option disabled selected>Selecciona una persona</option>";
         for (var cliente of obj) {
@@ -31,7 +31,7 @@
           .getElementById("lista")
           .addEventListener("change", function(){
             var id = this.value;
-            funAjax('bd_connect.php',function(xhttp){
+            funAjax('jsonCon.php',function(xhttp){
                 datosTabla(xhttp,id);
             })
           }
@@ -56,7 +56,7 @@
                             <tr>
                             <th>Apellidos</th>
                             <td>${cliente.apellidos}</td>
-                            <tr>
+                            </tr>
                             <th>Ciudad</th>
                             <td>${cliente.ciudad}</td>
                             </tr>
@@ -69,7 +69,7 @@
      
 
       window.onload = function(){
-        funAjax('bd_connect.php?ClienteId',selectList)
+        funAjax('jsonCon.php',listaSelect)
       };
     </script>
   </head>
@@ -78,7 +78,6 @@
     <select id="lista"></select>
     <br />
     <table id="tabla" border="1px">
-      <div>La tabla se cargará aquí....</div>
     </table>
   </body>
 </html>
