@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 - Tema 10</title>
+    <script>
+      // Función conexion FETCH
+      function funFetch(url) {
+        return fetch(url)
+            .then(result=>result.json())
+            .catch(e=>console.log(`Error capturado: ${e}`))
+      }
+
+      // Función para la lista tipo select
+      function listaSelect(data) {
+        var selec = "<option disabled selected>Selecciona una persona</option>";
+        for (var cliente of data) {
+          selec += `<option value="${cliente.id}" id="id-${cliente.id}">${cliente.nombre}</option>`;
+        }
+        document.getElementById("lista").innerHTML = selec;
+
+        // Agrega el event listener después de cargar la lista
+        document
+          .getElementById("lista")
+          .addEventListener("change", function(){
+            var id = this.value;
+            funFetch(`jsonCon.php?datos&id=${id}`)
+                .then(data=>datosTabla(data, id));
+          });
+      }
+
+      // Función tabla con datos de cliente
+      function datosTabla(data,id){
+            var tabla = "";
+            for (cliente of data) {
+              if (cliente.id === Number(id)) {
+                tabla += `
+                            <tr>
+                            <th>ID</th>
+                            <td>${cliente.id}</td>
+                            </tr>
+                            <tr>
+                            <th>Nombre</th>
+                            <td>${cliente.nombre}</td>
+                            </tr>
+                            <tr>
+                            <th>Apellidos</th>
+                            <td>${cliente.apellidos}</td>
+                            </tr>
+                            <tr>
+                            <th>Ciudad</th>
+                            <td>${cliente.ciudad}</td>
+                            </tr>
+                            `;
+              }
+            }
+            document.getElementById("tabla").innerHTML = tabla;
+
+            document.getElementById("mensajeTabla").style.display = "none";
+            
+      }
+
+      window.onload = function(){
+        try{
+            funFetch('./jsonCon.php')
+                .then(data => listaSelect(data))
+                .catch(error => {
+            console.error('Error:', error);
+            });
+        } catch(error) {
+            console.error('Error:', error);
+        }
+        console.log('Tabla HTML:', tabla);
+      };
+
+    </script>
+  </head>
+  <body>
+    <h3>Tarea 1 Tema 11</h3>
+    <select id="lista"></select>
+    <br />
+    <table id="tabla" border="1px">
+      <div id="mensajeTabla">La tabla aparece aquí...</div>
+    </table>
+  </body>
+</html>
