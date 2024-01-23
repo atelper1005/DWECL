@@ -6,88 +6,73 @@
     <title>Ejercicio 1 - Tema 10</title>
     <script>
       // Función conexion FETCH
-      function funFetch(url, fun) {
-        fetch(url)
-            .then(result=>result.json())
-            .then(function(obj){fun(obj)})
-            .catch(e=>console.log(`Error capturado: ${e}`))
-      }
+      // function funAjax(url, fun) {
+      //   fetch(url)
+      //       .then(result=>result.json())
+      //       .then(function(obj){fun(obj)})
+      //       .catch(e=>console.log(`Error capturado: ${e}`))
+      // }
 
       //Funcion usando async/await
-      // async function funAsyncAwait(url, fun) {
-      //   try {
-      //     const response = await fetch(url);
-      //     const objJson = await response.json();
-      //     fun(objJson);
-      //   } catch (error) {
-      //     console.log(error.message)
-      //   }
-      // }
+      async function funAjax(url, fun) {
+        try {
+          const response = await fetch(url);
+          const objJson = await response.json();
+          fun(objJson);
+        } catch (error) {
+          console.log(error.message)
+        }
+      }
 
       // Función para la lista tipo select
       function listaSelect(data) {
+        var lista = document.getElementById("lista");
         var selec = "<option disabled selected>Selecciona una persona</option>";
         for (var cliente of data) {
           selec += `<option value="${cliente.id}">${cliente.nombre}</option>`;
         }
-        document.getElementById("lista").innerHTML = selec; 
+
+        lista.innerHTML = selec; 
 
         // Agrega el event listener después de cargar la lista
-        document
-          .getElementById("lista")
-          .addEventListener("change", function(){
-            var id = this.value;
-            funFetch(`jsonCon.php?datos&id=${id}`, datosTabla);
-          });
+        lista.addEventListener("change", function () {
+          funAjax(`jsonCon.php?id=${this.value}`, datosTabla);
+        });
       }
 
       // Función tabla con datos de cliente
-      function datosTabla(data,id){
-            var tabla = "";
-            for (cliente of data) {
-              if (cliente.id === Number(id)) {
-                tabla += `
-                            <tr>
-                            <th>ID</th>
-                            <td>${cliente.id}</td>
-                            </tr>
-                            <tr>
-                            <th>Nombre</th>
-                            <td>${cliente.nombre}</td>
-                            </tr>
-                            <tr>
-                            <th>Apellidos</th>
-                            <td>${cliente.apellidos}</td>
-                            </tr>
-                            <tr>
-                            <th>Ciudad</th>
-                            <td>${cliente.ciudad}</td>
-                            </tr>
-                            `;
-              }
-            }
-            document.getElementById("tabla").innerHTML = tabla;
+      function datosTabla(data){
+
+        var tabla = document.getElementById("tabla");
+
+            tabla.innerHTML = "";
+
+            var contenidoTabla = `
+                <tr>
+                <th>ID</th>
+                <td>${data[0].id}</td>
+                </tr>
+                <tr>
+                <th>Nombre</th>
+                <td>${data[0].nombre}</td>
+                </tr>
+                <tr>
+                <th>Apellidos</th>
+                <td>${data[0].apellidos}</td>
+                <tr>
+                <th>Ciudad</th>
+                <td>${data[0].ciudad}</td>
+                </tr>`;
+
+            tabla.innerHTML = contenidoTabla;
 
             document.getElementById("mensajeTabla").style.display = "none";
             
       }
 
-      window.onload = function(){
-        funFetch('jsonCon.php?datos')
-    .then(data => listaSelect(data))
-    .catch(error => {
-      console.error('Error:', error);
-    });
-
-  document.getElementById("lista").addEventListener("change", function () {
-    var id = this.value;
-    funFetch(`jsonCon.php?datos&id=${id}`)
-      .then(data => datosTabla(data, id))
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    });
-  };
+      window.onload = function () {
+        funAjax("jsonCon.php?nombresId", listaSelect);
+      };
     </script>
   </head>
   <body>
