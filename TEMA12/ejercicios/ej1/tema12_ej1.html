@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1 - Tema 12 - JQuery</title>
+    <script>
+      $(document).ready(function () {
+          // Obtener nombres de usuarios al cargar la página
+          $.get('jsonCon.php?ClienteId', function (users) {
+              // Llenar el select con los nombres obtenidos
+              users.forEach(function (user) {
+                  $('#lista').append($('<option>', {
+                      value: user.id,
+                      text: user.nombre
+                  }));
+              });
+
+              // Manejar el cambio en el select
+              $('#lista').change(function () {
+                  var selectedUserId = $(this).val();
+                  // Obtener detalles del usuario seleccionado
+                  $.get('jsonCon.php?ClienteId&id=' + selectedUserId, function (userDetails) {
+                      // Mostrar detalles en el div correspondiente
+                      $('#tabla div').html(`
+                          <h2>Detalles de ${userDetails.nombre}</h2>
+                          <p>ID: ${userDetails.id}</p>
+                          <p>Apellidos: ${userDetails.apellidos}</p>
+                          <p>Ciudad: ${userDetails.ciudad}</p>
+                      `);
+                  });
+              });
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <h3>Tarea 1 Tema 10</h3>
+    <select id="lista"></select>
+    <br />
+    <table id="tabla" border="1px">
+      <div>La tabla se cargará aquí....</div>
+    </table>
+  </body>
+</html>

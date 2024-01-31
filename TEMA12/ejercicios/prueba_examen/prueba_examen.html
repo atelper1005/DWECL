@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+ $(function(){ 
+    function funAjax(e) {
+        e.preventDefault(); // Para no abandonar la página al enviar formulario.
+
+        //--------- Ajax con Promesas -----------------------------------------
+
+            const marca = $('#marca').val();
+            const modelo = $('#modelo').val();
+            const data = { marca: marca, modelo: modelo };
+            
+            fetch('examen1_2Eva.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                $('#datos').html('<h1>' + "El coche es un " + data.marca + "  " + data.modelo + '</h1>');
+                anadirTabla(data);
+            })
+            .catch(error => console.error('Error:', error));
+                
+        //----------------------------------------------------------------------
+
+        // ---------Ajax con jQuery---------------------------------------------
+
+            
+            // $.post('examen1_2Eva.php', { marca: $("#marca").val(), modelo: $("#modelo").val() }, 
+            // function(data) {
+            //     //console.log('Respuesta del servidor:', data);
+            //     data = JSON.parse(data)
+            //     $('#datos').html('<h1>'+ "El coche es un " + data.marca + '  ' + data.modelo + '</h1>');    
+            //     anadirTabla(data);
+            // });
+            
+
+        //----------------------------------------------------------------------
+
+        function anadirTabla(data) {
+            const table = $('<table>').appendTo($('#datos'));
+            const row = $('<tr>').appendTo(table);
+            $('<td>').text('Marca:').appendTo(row);
+            $('<td>').text(data.marca).appendTo(row);
+            const row2 = $('<tr>').appendTo(table);
+            $('<td>').text('Modelo:').appendTo(row2);
+            $('<td>').text(data.modelo).appendTo(row2);
+        }
+    }
+    $('form').submit(funAjax);
+})
+</script>
+</head>
+<body>
+    <form>
+    <label>Marca:</label><input type="text" id="marca" required="required">
+    <label>Modelo:</label><input type="text" id="modelo" required="required">
+    <button type="submit" >Enviar</button>
+    </form>
+    <div id="datos"> </div>
+   
+</body>
+</html> 
