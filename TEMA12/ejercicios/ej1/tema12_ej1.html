@@ -1,45 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio 1 - Tema 12 - JQuery</title>
+    <title>Ejercicio 1 - Tema 10</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-      $(document).ready(function () {
-          // Obtener nombres de usuarios al cargar la página
-          $.get('jsonCon.php?ClienteId', function (users) {
-              // Llenar el select con los nombres obtenidos
-              users.forEach(function (user) {
-                  $('#lista').append($('<option>', {
-                      value: user.id,
-                      text: user.nombre
-                  }));
-              });
+        $(document).ready(function () {
+            // Función conexion FETCH
+            async function funAjax(url, fun) {
+                try {
+                    const response = await fetch(url);
+                    const objJson = await response.json();
+                    fun(objJson);
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
 
-              // Manejar el cambio en el select
-              $('#lista').change(function () {
-                  var selectedUserId = $(this).val();
-                  // Obtener detalles del usuario seleccionado
-                  $.get('jsonCon.php?ClienteId&id=' + selectedUserId, function (userDetails) {
-                      // Mostrar detalles en el div correspondiente
-                      $('#tabla div').html(`
-                          <h2>Detalles de ${userDetails.nombre}</h2>
-                          <p>ID: ${userDetails.id}</p>
-                          <p>Apellidos: ${userDetails.apellidos}</p>
-                          <p>Ciudad: ${userDetails.ciudad}</p>
-                      `);
-                  });
-              });
-          });
-      });
+            // Función para la lista tipo select
+            function listaSelect(data) {
+                var lista = $("#lista");
+                var selec = "<option disabled selected>Selecciona una persona</option>";
+                for (var cliente of data) {
+                    selec += `<option value="${cliente.id}">${cliente.nombre}</option>`;
+                }
+                //Cargamos la lista en el html
+                lista.html(selec);
+
+                // Agrega el event listener después de cargar la lista
+                lista.change(function () {
+                    funAjax(`jsonCon.php?id=${$(this).val()}`, datosTabla);
+                });
+            }
+
+            // Función tabla con datos de cliente
+            function datosTabla(data) {
+                var tabla = $("#tabla");
+                //No pintamos/vaciamos la tabla
+                tabla.empty();
+
+                var contenidoTabla = `
+                    <tr>
+                    <th>ID</th>
+                    <td>${data[0].id}</td>
+                    </tr>
+                    <tr>
+                    <th>Nombre</th>
+                    <td>${data[0].nombre}</td>
+                    </tr>
+                    <tr>
+                    <th>Apellidos</th>
+                    <td>${data[0].apellidos}</td>
+                    <tr>
+                    <th>Ciudad</th>
+                    <td>${data[0].ciudad}</td>
+                    </tr>`;
+
+                //Pintamos/añadimos a la tabla
+                tabla.html(contenidoTabla);
+
+                $("#mensajeTabla").css("display", "none");
+            }
+
+            // Cargar datos al cargar la página
+            funAjax("jsonCon.php?nombresId", listaSelect);
+        });
     </script>
-  </head>
-  <body>
-    <h3>Tarea 1 Tema 10</h3>
+</head>
+<body>
+    <h3>Tarea 1 Tema 11</h3>
     <select id="lista"></select>
     <br />
     <table id="tabla" border="1px">
-      <div>La tabla se cargará aquí....</div>
+        <div id="mensajeTabla">La tabla aparece aquí...</div>
     </table>
-  </body>
+</body>
 </html>
