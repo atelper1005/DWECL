@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 5px;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(function () {
+        function funAjax(e) {
+          e.preventDefault(); // Para no abandonar la página al enviar formulario.
+
+          //Recogemos los valores que se introducen en el input y lo pasamos a variables para poder usarlo después.
+          var equipo1 = $("#equipo1").val();
+          var equipo2 = $("#equipo2").val();
+
+          //--------- Con Promesas--------------------------------------------------------
+        //   fetch("examen1_2Eva_2024.php", {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ equipo1: equipo1, equipo2: equipo2 }),
+        //   })
+        //   //Convertimos los datos en formato json y devolvemos los datos
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //       var equipo1Data = data.equipo1;
+        //       var equipo2Data = data.equipo2;
+
+        //       // Construimos el HTML de la tabla
+        //       var tabla = "";
+        //       for (var i = 0; i < equipo1Data.length; i++) {
+        //         var fila =
+        //           "<tr><td>" +
+        //           equipo1Data[i] +
+        //           "</td><td>" +
+        //           equipo2Data[i] +
+        //           "</td></tr>";
+        //           tabla += fila;
+        //       }
+
+        //       // Insertamos el HTML en el tbody
+        //       $("#datos").html(tabla);
+        //     });
+
+          //-------------------------------------------------------------------------------
+
+          // // -------Con jQuery----------------------------------------------------------
+
+          $.post('examen1_2Eva_2024.php', {equipo1: equipo1, equipo2: equipo2}, function(response) {
+              var data = JSON.parse(response);
+              var equipo1Data = data.equipo1;
+              var equipo2Data = data.equipo2;
+
+              // Construir el HTML de la tabla
+              var tabla = '';
+              for (var i = 0; i < equipo1Data.length; i++) {
+                  var fila = '<tr><td>' + equipo1Data[i] + '</td><td>' + equipo2Data[i] + '</td></tr>';
+                  tabla += fila;
+              }
+
+              // Insertar el HTML en el tbody
+              $('#datos').html(tabla);
+          });
+
+          // //----------------------------------------------------------------------------
+        }
+        $("form").submit(funAjax);
+      });
+    </script>
+  </head>
+  <body>
+    <form>
+      <label>ID_Equipo1:</label
+      ><input type="number" min="1" id="equipo1" required="required" />
+      <label>ID_Equipo2:</label
+      ><input type="number" min="1" id="equipo2" required="required" />
+      <button type="submit">Enviar</button>
+    </form>
+    <br />
+
+    <table>
+      <thead>
+        <tr>
+          <th>Equipo1</th>
+          <th>Equipo2</th>
+        </tr>
+      </thead>
+      <tbody id="datos"></tbody>
+    </table>
+  </body>
+</html>
