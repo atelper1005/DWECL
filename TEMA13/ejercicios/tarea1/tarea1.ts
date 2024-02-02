@@ -4,8 +4,9 @@ interface btn_principal {
 }
 
 class GrupoBot implements btn_principal {
-    constructor() {
-        contador: Number;
+    private contador: number;
+    constructor(contador:number) {
+        this.contador = contador;
     }
 
 }
