@@ -1,10 +1,9 @@
-"use strict";
 class Boton {
     constructor(num) {
         this.num = num;
     }
     crearBoton() {
-        const btn = $("<button></button>").text(`Botón ${this.num}`);
+        const btn = $("<button></button>").text(`${this.num}`);
         btn.on("click", () => alert(`Pulsaste el botón ${this.num}`));
         $("#div1").append(btn);
     }
