@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 // Conexion URI
-const uri = "mongodb+srv://atelper1005:atelper1005@tarea2.ihhkf1d.mongodb.net/?retryWrites=true&w=majority";
+const uri = "****";
 
 //Solucitudes JSON
 app.use(express.json());
