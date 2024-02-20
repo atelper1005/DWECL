@@ -4,66 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App MongoDB</title>
+    <script src="index.js"></script>
+    <script src="conexionMongoDB.js"></script>
 </head>
 <body>
-    <h1>Usuarios</h1>
-    <ul id="userList"></ul>
-
-    <h2>Agregar Usuario</h2>
-    <form id="addUserForm">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre">
-        <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido">
-        <br><br>
-        <button type="submit">Agregar Usuario</button>
-    </form>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Obtener la lista de usuarios al cargar la página
-            await getUsers();
-
-            // Manejar el envío del formulario para agregar usuario
-            document.getElementById('addUserForm').addEventListener('submit', async (event) => {
-                event.preventDefault();
-                const nombre = document.getElementById('nombre').value;
-                const apellido = document.getElementById('apellido').value;
-                await addUser(nombre, apellido);
-            });
-        });
-
-        // Función para obtener la lista de usuarios
-        async function getUsers() {
-            const response = await fetch('/users');
-            const data = await response.json();
-            const userList = document.getElementById('userList');
-            userList.innerHTML = '';
-            data.forEach(user => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${user.nombre}</td>
-                    <td>${user.apellido}</td>
-                `;
-                userList.appendChild(row);
-            });
-        }
-
-        // Función para agregar un nuevo usuario
-        async function addUser(nombre, apellido) {
-            const response = await fetch('/addUser', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ nombre, apellido })
-            });
-            if (response.ok) {
-                await getUsers();
-            } else {
-                console.error('Error al agregar usuario');
-            }
-        }
-    </script>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombreInput">
+    <label for="apellidos">Apellidos</label>
+    <input type="text" id="apellidosInput">
+    <br>
+    <br>
+    <button type="submit" id="enviarBtn">Enviar</button>
+    <br>
+    <br>
+    <table id="tablaDatos" border="2px" style="border-collapse: collapse">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Apellidos</td>
+            </tr>
+        </thead>
+        <tbody id="bodyTabla"></tbody>
+    </table>
 </body>
 </html>
