@@ -20,7 +20,7 @@ router.get("/", function (req, res) {
 app.post("/addDatos", async (req, res) => {
     try {
         const { nombre, apellidos } = req.body;
-        const db = client.db();
+        const db = client.db("tarea2");
         const collection = db.collection("personas");
         await collection.insertOne({ nombre, apellidos });
         res.send("Documento añadido correctamente");
@@ -33,8 +33,8 @@ app.post("/addDatos", async (req, res) => {
 // Obtiene por GET como un JSON todos los datos que tiene actualmente la base de datos
 app.get("/showPersonas", async (req, res) => {
     try {
-        const db = client.db();
-        const collection = db.collection("datos");
+        const db = client.db("tarea2");
+        const collection = db.collection("personas");
         const documents = await collection.find({}).toArray();
         res.json(documents);
     } catch (err) {
