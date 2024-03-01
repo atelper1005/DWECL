@@ -14,7 +14,7 @@
     <p>
       <mat-form-field class="example-full-width">
         <mat-label>Dirección</mat-label>
-        <textarea matInput placeholder="Ex. 100 Main St"></textarea>
+        <textarea matInput placeholder="Calle, número y puerta"></textarea>
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <span matTextPrefix>+34 &nbsp;</span>
@@ -26,15 +26,15 @@
     <table class="example-full-width" cellspacing="0"><tr>
       <td><mat-form-field class="example-full-width">
         <mat-label>Ciudad</mat-label>
-        <input matInput placeholder="Ex. San Francisco">
+        <input matInput placeholder="San Francisco">
       </mat-form-field></td>
       <td><mat-form-field class="example-full-width">
         <mat-label>País</mat-label>
-        <input matInput placeholder="Ex. California">
+        <input matInput placeholder="EEUU">
       </mat-form-field></td>
       <td><mat-form-field class="example-full-width">
         <mat-label>Código Postal</mat-label>
-        <input matInput #postalCode maxlength="5" placeholder="Ex. 11630">
+        <input matInput #postalCode maxlength="5" placeholder="11630">
         <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
       </mat-form-field></td>
     </tr></table>
